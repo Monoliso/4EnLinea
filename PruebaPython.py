@@ -23,7 +23,7 @@ def TableroVacio():
 #         return []
 #     return [tablero[L - 1][columna - 1]] + ContenidoColumna2[columna, tablero.pop()]
 
-############################################## Contenido Tablero
+################################################# Contenido Tablero
 
 def ContenidoColumna(nro_columna, tablero):
     columna = []
@@ -39,12 +39,23 @@ def ContenidoTodasLasColumnas(tablero):
     return columnas
 
 def ContenidoFila(nro_fila, tablero):
-    return tablero[6 - nro_fila]
+    return tablero[nro_fila - 1] #[6 - nro_fila] para conseguir de forma invertida
 
 def ContenidoTodasLasFilas(tablero):
     return tablero
 
-############################################## Formación Tablero
+################################################# Formación Tablero
+
+def Contorno(tablero):
+    for fila in range(6):
+        print("| ", end='')
+        for columna in range (7):
+            print(tablero[fila][columna], end='') # En estas 3 líneas se puede ver que imprimir una variable *Y* caracteres 
+            if(columna != 6):                     # en un mismo print genera entre ellos un espacio automáticamente, es por ello
+                print("  ", end='')               # que agrego ese cuestionable 'if'. Logra, al menos, su cometido.
+        print(" |")
+    print("+---------------------+")
+    return tablero
 
 def ReemplazoPorEspacio(tablero):
     for fila in range(6):
@@ -68,7 +79,7 @@ def CompletarTableroEnOrden(secuencia, tablero):
         SoltarFichaEnColumna (ficha, columna, tablero)
     return tablero
 
-############################################## Comprobación de Calidad
+################################################# Comprobación de Calidad
 
 def ComprobacionSecuencia(secuencia):
 
@@ -77,21 +88,32 @@ def ComprobacionSecuencia(secuencia):
             return False
     return True
 
-############################################# Output
+################################################# Output
 
 def DibujarTablero(tablero):
-    #ReemplazoPorEspacio(tablero)
-    for x in tablero:
-        print(x)
-    print (ContenidoColumna(1, tablero))
-    # print (ContenidoColumna2(1, tablero))
-    i = 0
-    for x in ContenidoTodasLasColumnas(tablero):
-        i = i + 1
-        print ("Columna número", i)
-        print (x)
-    print (ContenidoFila(1, tablero))
-    print (ContenidoTodasLasFilas(tablero))
+    i = 1
+    Contorno(ReemplazoPorEspacio(tablero))
+    print ("Contenido de la columna {}:\n".format(i), ContenidoColumna(i, tablero)) #Acá hay más ejemplos del caso de las líneas 53-55.
+    for x in range(7):
+        print ("Columna numero {}:".format(x + 1))
+        aux = ContenidoTodasLasColumnas(tablero)
+        print (aux[x])
+    
+    # for x in ContenidoTodasLasColumnas(tablero): #Posibles versión
+    #     i = i + 1
+    #     print ("Columna numero {}:".format(i))  
+    #     print (x)
+    
+    print ("Contenido de la fila {}:\n".format(i), ContenidoFila(i, tablero))
+    for x in range(6):
+        print ("Fila numero {}:".format(x + 1))
+        aux = ContenidoTodasLasFilas(tablero)
+        print (aux[x])
+    
+    # for x in ContenidoTodasLasFilas(tablero): #Posible versión
+    #     i = i + 1
+    #     print ("Fila numero {}:".format(i))
+    #     print (x)
 
 if ComprobacionSecuencia(secuencia):
     DibujarTablero( 
