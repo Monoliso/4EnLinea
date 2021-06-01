@@ -1,10 +1,5 @@
 print("Bienvenido al juego '4 En Línea' por Luca Seri para la materia 'Adaptaciones del Ambiente de Trabajo':")
 
-#print("Introduzca una secuencia de juego")
-#Para en el futuro agregar algo como un Scanf.
-
-secuencia = [1, 2, 3, 1, 4, 7, 1, 1, 1]
-
 def TableroVacio():
     return[
         [0, 0, 0, 0, 0, 0, 0],
@@ -22,6 +17,13 @@ def TableroVacio():
 #     if(tablero == []):
 #         return []
 #     return [tablero[L - 1][columna - 1]] + ContenidoColumna2[columna, tablero.pop()]
+
+################################################# Imput
+
+secuencia_texto = input("Introduzca una secuencia de juego: ")
+secuencia = []
+for items in secuencia_texto.split(','):
+    secuencia.append(int(items))
 
 ################################################# Contenido Tablero
 
